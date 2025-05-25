@@ -27,6 +27,12 @@
         </div>
         <div id="calendar"></div>
         <h2>選択した日</h2>
+        <label for="dateFormatSelect" style="font-size: 0.95em; margin-right: 8px;">日付表示形式</label>
+        <select id="dateFormatSelect">
+            <option value="yyyy/mm/dd">yyyy/MM/dd</option>
+            <option value="yy/mm/dd">yy/MM/dd</option>
+            <option value="mm/dd" selected>MM/dd</option>
+        </select>
         <div id="selectedShifts"></div>
         <div class="shift-actions">
             <button id="clearShifts" type="button">全て解除</button>

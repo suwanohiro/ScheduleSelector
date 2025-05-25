@@ -164,20 +164,34 @@ function renderCalendar(year, month) {
 }
 
 /**
+ * 日付表示形式
+ */
+const dateFormats = [
+    { key: 'yyyy/mm/dd', label: 'yyyy/MM/dd', format: (y, m, d) => `${y}/${pad(m)}/${pad(d)}` },
+    { key: 'yy/mm/dd', label: 'yy/MM/dd', format: (y, m, d) => `${String(y).slice(-2)}/${pad(m)}/${pad(d)}` },
+    { key: 'mm/dd', label: 'MM/dd', format: (y, m, d) => `${pad(m)}/${pad(d)}` }
+];
+let selectedDateFormat = 'mm/dd'; // デフォルト
+
+/**
  * 選択されたシフト一覧を表示する
  */
 function renderSelectedShifts() {
     const out = document.getElementById('selectedShifts');
     let lines = [];
+    const fmtObj = dateFormats.find(f => f.key === selectedDateFormat) || dateFormats[2];
     Object.keys(selectedShifts)
         .sort()
         .forEach(date => {
-            const d = new Date(date.replace(/\//g, '-'));
-            const wd = weekDays[d.getDay()];
+            // date: yyyy/mm/dd
+            const [y, m, d] = date.split('/').map(Number);
+            const dObj = new Date(y, m - 1, d);
+            const wd = weekDays[dObj.getDay()];
+            const dateStr = fmtObj.format(y, m, d);
             selectedShifts[date]
                 .sort()
                 .forEach(time => {
-                    lines.push(`・${date} (${wd}) ${time} コマ`);
+                    lines.push(`・${dateStr} (${wd}) ${time} コマ`);
                 });
         });
     out.textContent = lines.join('\n');
@@ -283,4 +297,14 @@ window.onload = function () {
     setupCopyButton();
     setupClearButton();
     setupAllowPastControl();
+
+    // ▼ select要素のイベントで切り替え
+    const select = document.getElementById('dateFormatSelect');
+    if (select) {
+        selectedDateFormat = select.value;
+        select.addEventListener('change', function () {
+            selectedDateFormat = this.value;
+            renderSelectedShifts();
+        });
+    }
 };
