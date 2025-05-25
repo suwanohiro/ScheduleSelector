@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>振替可能日選択ページ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container">
+        <h1>振替可能日選択</h1>
+        <div class="calendar-controls">
+            <button id="prevMonth" aria-label="前の月">&lt;</button>
+            <span id="currentMonth"></span>
+            <button id="nextMonth" aria-label="次の月">&gt;</button>
+        </div>
+        <div class="calendar-sub-controls">
+            <button id="resetMonth" aria-label="今月に戻る">今月</button>
+            <div class="past-allow-control">
+                <label>
+                    <input type="checkbox" id="allowPast" class="material-checkbox">
+                    昨日以前も選択可能にする
+                </label>
+            </div>
+        </div>
+        <div id="calendar"></div>
+        <h2>選択した日</h2>
+        <div id="selectedShifts"></div>
+        <div class="shift-actions">
+            <button id="clearShifts" type="button">全て解除</button>
+            <button id="copyShifts" type="button">コピー</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

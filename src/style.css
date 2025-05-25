@@ -1,0 +1,310 @@
+* {
+    user-select: none;
+}
+
+body {
+    font-family: Consolas, 'メイリオ', 'Meiryo', 'Noto Sans JP', Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 38rem;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    width: 95vw;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+h1,
+h2 {
+    color: #1976d2;
+    margin-bottom: 16px;
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+.calendar-controls button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.calendar-controls button:hover {
+    background: #1565c0;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.35rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 21rem;
+    max-width: 100%;
+}
+
+.calendar-day {
+    background: #e3f2fd;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.25rem;
+    min-height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.95em;
+    position: relative;
+    box-sizing: border-box;
+    word-break: break-all;
+    max-width: 100%;
+}
+
+.calendar-day.today {
+    border: 2px solid #1976d2;
+    background: #bbdefb;
+}
+
+.calendar-day .date-label {
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    /* ← 追加で改行防止 */
+}
+
+.shift-options {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.shift-options label {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* マテリアル風チェックボックス */
+.shift-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #1976d2;
+    border-radius: 4px;
+    background: #fff;
+    margin-right: 6px;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+}
+
+.shift-checkbox:checked {
+    background: #1976d2;
+    border-color: #1976d2;
+}
+
+.shift-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+#selectedShifts {
+    background: #e3f2fd;
+    border-radius: 8px;
+    padding: 12px;
+    min-height: 40px;
+    font-size: 1em;
+    color: #333;
+    font-weight: bold;
+    white-space: pre-line;
+}
+
+#copyShifts {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 24px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 12px;
+    margin-left: auto;
+    display: block;
+}
+
+#copyShifts:hover {
+    background: #1565c0;
+}
+
+.shift-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    justify-content: flex-end;
+}
+
+#clearShifts {
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 24px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 12px;
+    display: block;
+}
+
+#clearShifts:hover {
+    background: #b71c1c;
+}
+
+.past-allow-control {
+    margin: 8px 0 12px 0;
+    text-align: right;
+    font-size: 0.98em;
+}
+
+.past-allow-control label {
+    cursor: pointer;
+    user-select: auto;
+}
+
+.past-allow-control input[type="checkbox"] {
+    margin-right: 4px;
+    accent-color: #1976d2;
+}
+
+.calendar-day.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* シフトがない日のセルも選択不可と同じ背景色に */
+.calendar-day:not(.today):not(.disabled):empty,
+.calendar-day.no-shift {
+    background: #e3f2fd;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.material-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #1976d2;
+    border-radius: 4px;
+    background: #fff;
+    margin-right: 6px;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.material-checkbox:checked {
+    background: #1976d2;
+    border-color: #1976d2;
+}
+
+.material-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+/* 今月に戻るボタンのデザイン */
+#resetMonth {
+    background: #43a047;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 0 18px;
+    height: 32px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 0.2s;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+#resetMonth:hover {
+    background: #2e7d32;
+}
+
+/* サブコントロール（今月・過去選択可）を左右に分ける */
+.calendar-sub-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.calendar-sub-controls #resetMonth {
+    margin-left: 0;
+}
+
+.calendar-sub-controls .past-allow-control {
+    margin: 0;
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 0.5rem;
+        max-width: 100vw;
+        min-width: 0;
+    }
+
+    #calendar {
+        gap: 0.1rem;
+        min-width: 0;
+    }
+
+    .calendar-day {
+        min-height: 2.8rem;
+        font-size: 0.85em;
+        padding: 0.25rem 0.05rem;
+    }
+}
