@@ -1,3 +1,59 @@
+:root {
+    /* 色関連 */
+    --color__primary: #1976d2;
+    --color__primary-dark: #1565c0;
+    --color__danger: #e53935;
+    --color__danger-dark: #b71c1c;
+    --color__accent: #ff9800;
+    --color__accent-dark: #f57c00;
+    --color__calendar-day-bg: #f9f9f9;
+    --color__calendar-day-bg-today: #e3f2fd;
+    --color__calendar-day-border-today: 2px solid #1976d2;
+    --color__selected-shifts-bg: #e3f2fd;
+    --color__selected-shifts-color: #1976d2;
+    --color__checkbox-bg: #fff;
+    --color__checkbox-checked-bg: #1976d2;
+    --color__checkbox-border: 2px solid #bdbdbd;
+    --color__checkbox-checked-border: 2px solid #1976d2;
+    --color__checkbox-check-color: #fff;
+    --color__date-format-select-bg: #fff;
+    --color__date-format-select-border: 1px solid #bdbdbd;
+    --color__date-format-select-focus-border: #1976d2;
+    --color__date-format-select-focus-shadow: 0 0 0 2px #1976d233;
+    --color__date-format-select-color: #333;
+
+    /* 角丸・影・余白など */
+    --radius__container: 12px;
+    --shadow__container: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --radius__calendar-day: 8px;
+    --radius__button: 6px;
+    --radius__checkbox: 4px;
+    --radius__selected-shifts: 8px;
+    --radius__reset-month: 16px;
+    --radius__date-format-select: 6px;
+
+    /* パディング・ギャップ */
+    --gap__calendar: 8px;
+    --gap__calendar-mobile: 4px;
+    --padding__container: 1.5rem;
+    --padding__reset-month: 4px 16px;
+
+    /* フォントサイズ・太さ */
+    --font-size__base: 1rem;
+    --font-weight__reset-month: bold;
+    --letter-spacing__reset-month: 0.04em;
+
+    /* チェックボックス */
+    --size__checkbox: 20px;
+    --width__checkbox-check: 8px;
+    --height__checkbox-check: 14px;
+    --width__checkbox-check-border: 0 2px 2px 0;
+
+    /* その他 */
+    --height__reset-month: 36px;
+    --transition__base: 0.2s;
+}
+
 * {
     user-select: none;
 }
@@ -13,9 +69,9 @@ body {
     max-width: 38rem;
     margin: 2rem auto;
     background: #fff;
-    border-radius: 0.75rem;
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
-    padding: 1.5rem;
+    border-radius: var(--radius__container);
+    box-shadow: var(--shadow__container);
+    padding: var(--padding__container);
     width: 95vw;
     box-sizing: border-box;
     overflow-x: auto;
@@ -23,7 +79,7 @@ body {
 
 h1,
 h2 {
-    color: #1976d2;
+    color: var(--color__primary);
     margin-bottom: 16px;
 }
 
@@ -36,7 +92,7 @@ h2 {
 }
 
 .calendar-controls button {
-    background: #1976d2;
+    background: var(--color__primary);
     color: #fff;
     border: none;
     border-radius: 50%;
@@ -44,17 +100,17 @@ h2 {
     height: 32px;
     font-size: 1.2em;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background var(--transition__base);
 }
 
 .calendar-controls button:hover {
-    background: #1565c0;
+    background: var(--color__primary-dark);
 }
 
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.35rem;
+    gap: var(--gap__calendar);
     margin-bottom: 1.5rem;
     width: 100%;
     box-sizing: border-box;
@@ -63,8 +119,8 @@ h2 {
 }
 
 .calendar-day {
-    background: #e3f2fd;
-    border-radius: 0.5rem;
+    background: var(--color__calendar-day-bg);
+    border-radius: var(--radius__calendar-day);
     padding: 0.5rem 0.25rem;
     min-height: 5rem;
     display: flex;
@@ -78,15 +134,14 @@ h2 {
 }
 
 .calendar-day.today {
-    border: 2px solid #1976d2;
-    background: #bbdefb;
+    border: var(--color__calendar-day-border-today);
+    background: var(--color__calendar-day-bg-today);
 }
 
 .calendar-day .date-label {
     font-weight: bold;
     margin-bottom: 4px;
     white-space: nowrap;
-    /* ← 追加で改行防止 */
 }
 
 .shift-options {
@@ -106,22 +161,22 @@ h2 {
 .shift-checkbox {
     appearance: none;
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #1976d2;
-    border-radius: 4px;
-    background: #fff;
+    width: var(--size__checkbox);
+    height: var(--size__checkbox);
+    border: var(--color__checkbox-border);
+    border-radius: var(--radius__checkbox);
+    background: var(--color__checkbox-bg);
     margin-right: 6px;
     position: relative;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color var(--transition__base), background var(--transition__base);
     cursor: pointer;
     outline: none;
     vertical-align: middle;
 }
 
 .shift-checkbox:checked {
-    background: #1976d2;
-    border-color: #1976d2;
+    background: var(--color__checkbox-checked-bg);
+    border-color: var(--color__checkbox-checked-border);
 }
 
 .shift-checkbox:checked::after {
@@ -129,41 +184,41 @@ h2 {
     position: absolute;
     left: 4px;
     top: 0px;
-    width: 6px;
-    height: 12px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
+    width: var(--width__checkbox-check);
+    height: var(--height__checkbox-check);
+    border: solid var(--color__checkbox-check-color);
+    border-width: var(--width__checkbox-check-border);
     transform: rotate(45deg);
     pointer-events: none;
 }
 
 #selectedShifts {
-    background: #e3f2fd;
-    border-radius: 8px;
+    background: var(--color__selected-shifts-bg);
+    border-radius: var(--radius__selected-shifts);
     padding: 12px;
     min-height: 40px;
-    font-size: 1em;
-    color: #333;
+    font-size: var(--font-size__base);
+    color: var(--color__selected-shifts-color);
     font-weight: bold;
     white-space: pre-line;
 }
 
 #copyShifts {
-    background: #1976d2;
+    background: var(--color__primary);
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius__button);
     padding: 8px 24px;
-    font-size: 1em;
+    font-size: var(--font-size__base);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background var(--transition__base);
     margin-top: 12px;
     margin-left: auto;
     display: block;
 }
 
 #copyShifts:hover {
-    background: #1565c0;
+    background: var(--color__primary-dark);
 }
 
 .shift-actions {
@@ -174,20 +229,20 @@ h2 {
 }
 
 #clearShifts {
-    background: #e53935;
+    background: var(--color__danger);
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius__button);
     padding: 8px 24px;
-    font-size: 1em;
+    font-size: var(--font-size__base);
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background var(--transition__base);
     margin-top: 12px;
     display: block;
 }
 
 #clearShifts:hover {
-    background: #b71c1c;
+    background: var(--color__danger-dark);
 }
 
 .past-allow-control {
@@ -203,7 +258,7 @@ h2 {
 
 .past-allow-control input[type="checkbox"] {
     margin-right: 4px;
-    accent-color: #1976d2;
+    accent-color: var(--color__primary);
 }
 
 .calendar-day.disabled {
@@ -214,7 +269,7 @@ h2 {
 /* シフトがない日のセルも選択不可と同じ背景色に */
 .calendar-day:not(.today):not(.disabled):empty,
 .calendar-day.no-shift {
-    background: #e3f2fd;
+    background: var(--color__calendar-day-bg);
     opacity: 0.4;
     pointer-events: none;
 }
@@ -222,21 +277,21 @@ h2 {
 .material-checkbox {
     appearance: none;
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #1976d2;
-    border-radius: 4px;
-    background: #fff;
+    width: var(--size__checkbox);
+    height: var(--size__checkbox);
+    border: var(--color__checkbox-border);
+    border-radius: var(--radius__checkbox);
+    background: var(--color__checkbox-bg);
     margin-right: 6px;
     position: relative;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color var(--transition__base), background var(--transition__base);
     cursor: pointer;
     vertical-align: middle;
 }
 
 .material-checkbox:checked {
-    background: #1976d2;
-    border-color: #1976d2;
+    background: var(--color__checkbox-checked-bg);
+    border-color: var(--color__checkbox-checked-border);
 }
 
 .material-checkbox:checked::after {
@@ -244,32 +299,32 @@ h2 {
     position: absolute;
     left: 4px;
     top: 0px;
-    width: 6px;
-    height: 12px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
+    width: var(--width__checkbox-check);
+    height: var(--height__checkbox-check);
+    border: solid var(--color__checkbox-check-color);
+    border-width: var(--width__checkbox-check-border);
     transform: rotate(45deg);
     pointer-events: none;
 }
 
 /* 今月に戻るボタンのデザイン */
 #resetMonth {
-    background: #43a047;
+    background: var(--color__accent);
     color: #fff;
     border: none;
-    border-radius: 20px;
-    padding: 0 18px;
-    height: 32px;
-    font-size: 1em;
+    border-radius: var(--radius__reset-month);
+    padding: var(--padding__reset-month);
+    height: var(--height__reset-month);
+    font-size: var(--font-size__base);
     cursor: pointer;
     margin-left: 10px;
-    transition: background 0.2s;
-    font-weight: bold;
-    letter-spacing: 0.05em;
+    transition: background var(--transition__base);
+    font-weight: var(--font-weight__reset-month);
+    letter-spacing: var(--letter-spacing__reset-month);
 }
 
 #resetMonth:hover {
-    background: #2e7d32;
+    background: var(--color__accent-dark);
 }
 
 /* サブコントロール（今月・過去選択可）を左右に分ける */
@@ -290,6 +345,32 @@ h2 {
     text-align: right;
 }
 
+/* 日付表示形式セレクトボックスのデザイン */
+#dateFormatSelect {
+    background: var(--color__date-format-select-bg);
+    border: var(--color__date-format-select-border);
+    border-radius: var(--radius__date-format-select);
+    padding: 4px 12px;
+    font-size: var(--font-size__base);
+    color: var(--color__date-format-select-color);
+    margin-bottom: 8px;
+    margin-right: 8px;
+    outline: none;
+    transition: border-color var(--transition__base), box-shadow var(--transition__base);
+    vertical-align: middle;
+}
+
+#dateFormatSelect:focus {
+    border-color: var(--color__date-format-select-focus-border);
+    box-shadow: var(--color__date-format-select-focus-shadow);
+}
+
+label[for="dateFormatSelect"] {
+    color: var(--color__primary);
+    font-weight: bold;
+    vertical-align: middle;
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 0.5rem;
@@ -298,7 +379,7 @@ h2 {
     }
 
     #calendar {
-        gap: 0.1rem;
+        gap: var(--gap__calendar-mobile);
         min-width: 0;
     }
 
