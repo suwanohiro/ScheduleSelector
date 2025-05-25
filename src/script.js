@@ -357,4 +357,10 @@ window.onload = function () {
     }
 
     fetchAndShowVersion(); // res/version.txtから取得
+
+    // --- Service Worker登録 ---
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js')
+            .catch(err => console.warn('Service Worker登録失敗:', err));
+    }
 };
