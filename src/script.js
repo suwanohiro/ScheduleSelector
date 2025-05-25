@@ -75,6 +75,10 @@ function createDayCell(day, year, month, date) {
     const label = document.createElement('div');
     label.className = 'date-label';
     label.textContent = date;
+
+    if (day.getDay() === 0) label.classList.add('sun'); // 日曜
+    if (day.getDay() === 6) label.classList.add('sat'); // 土曜
+
     cell.appendChild(label);
 
     // シフトがない曜日は早期リターン
@@ -146,6 +150,8 @@ function renderCalendar(year, month) {
         header.textContent = day;
         header.style.fontWeight = 'bold';
         header.style.textAlign = 'center';
+        if (day === '土') header.classList.add('sat');
+        if (day === '日') header.classList.add('sun');
         calendar.appendChild(header);
     });
 

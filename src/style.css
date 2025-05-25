@@ -1,26 +1,29 @@
 :root {
-    /* 色関連 */
-    --color__primary: #2196f3;
-    --color__primary-dark: #1976d2;
-    --color__danger: #f44336;
-    --color__danger-dark: #b71c1c;
-    --color__accent: #ff9800;
-    --color__accent-dark: #f57c00;
-    --color__calendar-day-bg: #f9f9f9;
-    --color__calendar-day-bg-today: #fffde7;
-    --color__calendar-day-border-today: 2px solid #ff9800;
-    --color__selected-shifts-bg: #e3f2fd;
-    --color__selected-shifts-color: #1976d2;
-    --color__checkbox-bg: #fff;
-    --color__checkbox-checked-bg: #2196f3;
-    --color__checkbox-border: 2px solid #bdbdbd;
-    --color__checkbox-checked-border: 2px solid #2196f3;
+    --color__primary: #007acc;
+    --color__primary-dark: #005a9e;
+    --color__danger: #f14c4c;
+    --color__danger-dark: #a4262c;
+    --color__accent: #d7ba7d;
+    --color__accent-dark: #b89550;
+    --color__calendar-day-bg: #1e1e1e;
+    --color__calendar-day-bg-today: #2a2d2e;
+    --color__calendar-day-border-today: 2px solid #d7ba7d;
+    --color__selected-shifts-bg: #262626;
+    --color__selected-shifts-color: #569cd6;
+    --color__checkbox-bg: #252526;
+    --color__checkbox-checked-bg: #007acc;
+    --color__checkbox-border: 2px solid #3c3c3c;
+    --color__checkbox-checked-border: 2px solid #007acc;
     --color__checkbox-check-color: #fff;
-    --color__date-format-select-bg: #fff;
-    --color__date-format-select-border: 1px solid #bdbdbd;
-    --color__date-format-select-focus-border: #2196f3;
-    --color__date-format-select-focus-shadow: 0 0 0 2px #2196f333;
-    --color__date-format-select-color: #333;
+    --color__date-format-select-bg: #1e1e1e;
+    --color__date-format-select-border: 1px solid #3c3c3c;
+    --color__date-format-select-focus-border: #007acc;
+    --color__date-format-select-focus-shadow: 0 0 0 2px #007acc33;
+    --color__date-format-select-color: #d4d4d4;
+    --color__date-label-sat: #4FC3F7;
+    --color__date-label-sun: #FF6B6B;
+    --color__calendar-border: #fff3;
+    --color__calendar-bg: #232323;
 
     /* 角丸・影・余白など（ここは現状維持） */
     --radius__container: 12px;
@@ -60,27 +63,23 @@
 
 body {
     font-family: Consolas, 'メイリオ', 'Meiryo', 'Noto Sans JP', Arial, sans-serif;
-    background: #f5f5f5;
+    background: #1e1e1e;
     margin: 0;
-    color: #333;
+    color: #d4d4d4;
 }
 
 .container {
-    max-width: 38rem;
+    background: #232323;
     margin: 2rem auto;
-    background: #fff;
-    border-radius: var(--radius__container);
-    box-shadow: var(--shadow__container);
+    max-width: 600px;
+    min-width: 320px;
     padding: var(--padding__container);
-    width: 95vw;
     box-sizing: border-box;
-    overflow-x: auto;
 }
 
 h1,
 h2 {
     color: var(--color__primary);
-    margin-bottom: 16px;
 }
 
 .calendar-controls {
@@ -116,6 +115,10 @@ h2 {
     box-sizing: border-box;
     min-width: 21rem;
     max-width: 100%;
+    border: 1.5px solid var(--color__calendar-border);
+    border-radius: var(--radius__container);
+    background: var(--color__calendar-bg);
+    padding: 12px;
 }
 
 .calendar-day {
@@ -131,6 +134,7 @@ h2 {
     box-sizing: border-box;
     word-break: break-all;
     max-width: 100%;
+    border: 1px solid #fff2;
 }
 
 .calendar-day.today {
@@ -142,6 +146,14 @@ h2 {
     font-weight: bold;
     margin-bottom: 4px;
     white-space: nowrap;
+}
+
+.sat {
+    color: var(--color__date-label-sat);
+}
+
+.sun {
+    color: var(--color__date-label-sun);
 }
 
 .shift-options {
@@ -201,6 +213,7 @@ h2 {
     color: var(--color__selected-shifts-color);
     font-weight: bold;
     white-space: pre-line;
+    border: 1px solid #fff3;
 }
 
 #copyShifts {
@@ -380,7 +393,7 @@ footer {
     text-align: center;
     margin-top: 2em;
     margin-bottom: 2em;
-    color: #888;
+    color: #858585;
     font-size: 0.95em;
 }
 
@@ -403,18 +416,23 @@ footer a:focus {
 @media (max-width: 600px) {
     .container {
         padding: 0.5rem;
-        max-width: 100vw;
+        max-width: 100%;
         min-width: 0;
+        margin: 0 auto;
     }
 
     #calendar {
         gap: var(--gap__calendar-mobile);
         min-width: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 4px;
+        box-sizing: border-box;
     }
 
     .calendar-day {
-        min-height: 2.8rem;
-        font-size: 0.85em;
-        padding: 0.25rem 0.05rem;
+        min-height: 2.2rem;
+        font-size: 0.80em;
+        padding: 0.15rem 0.02rem;
     }
 }
