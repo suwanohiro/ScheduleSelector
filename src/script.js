@@ -209,13 +209,40 @@ function renderSelectedShifts() {
 function setupCopyButton() {
     const btn = document.getElementById('copyShifts');
     btn.onclick = function () {
-        const text = document.getElementById('selectedShifts').textContent;
+        const text = document.getElementById('selectedShifts').innerText;
         if (!text) return;
-        navigator.clipboard.writeText(text).then(() => {
-            btn.textContent = "コピーしました！";
-            setTimeout(() => { btn.textContent = "コピー"; }, 1200);
-        });
+
+        // クリップボードAPIが使える場合
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = "コピーしました！";
+                setTimeout(() => { btn.textContent = "コピー"; }, 1200);
+            }).catch(() => {
+                fallbackCopyText(text, btn);
+            });
+        } else {
+            // フォールバック
+            fallbackCopyText(text, btn);
+        }
     };
+}
+
+function fallbackCopyText(text, btn) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+        const successful = document.execCommand('copy');
+        btn.textContent = successful ? "コピーしました！" : "コピー失敗";
+    } catch (err) {
+        btn.textContent = "コピー非対応";
+    }
+    setTimeout(() => { btn.textContent = "コピー"; }, 1200);
+    document.body.removeChild(textarea);
 }
 
 /**
