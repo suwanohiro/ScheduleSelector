@@ -289,8 +289,23 @@ function setupAllowPastControl() {
 }
 
 /**
- * ページロード時の初期化処理
+ * バージョン情報をres/version.txtから取得して表示
  */
+function fetchAndShowVersion() {
+    fetch('./public/version.txt')
+        .then(res => res.text())
+        .then(text => {
+            const versionElem = document.getElementById('appVersion');
+            if (versionElem) {
+                versionElem.textContent = text.trim();
+            }
+        })
+        .catch(() => {
+            // 失敗時は何もしない（またはデフォルト値のまま）
+            console.warn('バージョン情報の取得に失敗しました');
+        });
+}
+
 window.onload = function () {
     setupCalendar();
     renderSelectedShifts();
@@ -307,4 +322,6 @@ window.onload = function () {
             renderSelectedShifts();
         });
     }
+
+    fetchAndShowVersion(); // res/version.txtから取得
 };
