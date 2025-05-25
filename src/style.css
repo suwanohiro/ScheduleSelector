@@ -1,28 +1,28 @@
 :root {
     /* 色関連 */
-    --color__primary: #1976d2;
-    --color__primary-dark: #1565c0;
-    --color__danger: #e53935;
+    --color__primary: #2196f3;
+    --color__primary-dark: #1976d2;
+    --color__danger: #f44336;
     --color__danger-dark: #b71c1c;
     --color__accent: #ff9800;
     --color__accent-dark: #f57c00;
     --color__calendar-day-bg: #f9f9f9;
-    --color__calendar-day-bg-today: #e3f2fd;
-    --color__calendar-day-border-today: 2px solid #1976d2;
+    --color__calendar-day-bg-today: #fffde7;
+    --color__calendar-day-border-today: 2px solid #ff9800;
     --color__selected-shifts-bg: #e3f2fd;
     --color__selected-shifts-color: #1976d2;
     --color__checkbox-bg: #fff;
-    --color__checkbox-checked-bg: #1976d2;
+    --color__checkbox-checked-bg: #2196f3;
     --color__checkbox-border: 2px solid #bdbdbd;
-    --color__checkbox-checked-border: 2px solid #1976d2;
+    --color__checkbox-checked-border: 2px solid #2196f3;
     --color__checkbox-check-color: #fff;
     --color__date-format-select-bg: #fff;
     --color__date-format-select-border: 1px solid #bdbdbd;
-    --color__date-format-select-focus-border: #1976d2;
-    --color__date-format-select-focus-shadow: 0 0 0 2px #1976d233;
+    --color__date-format-select-focus-border: #2196f3;
+    --color__date-format-select-focus-shadow: 0 0 0 2px #2196f333;
     --color__date-format-select-color: #333;
 
-    /* 角丸・影・余白など */
+    /* 角丸・影・余白など（ここは現状維持） */
     --radius__container: 12px;
     --shadow__container: 0 2px 8px rgba(0, 0, 0, 0.08);
     --radius__calendar-day: 8px;
@@ -369,6 +369,35 @@ label[for="dateFormatSelect"] {
     color: var(--color__primary);
     font-weight: bold;
     vertical-align: middle;
+}
+
+.label-date-format {
+    font-size: 0.95em;
+    margin-right: 8px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: #888;
+    font-size: 0.95em;
+}
+
+footer a {
+    color: var(--color__primary);
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+    margin: 0 2px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+footer a:hover,
+footer a:focus {
+    color: #fff;
+    background: var(--color__primary-dark);
+    text-decoration: none;
 }
 
 @media (max-width: 600px) {

@@ -27,7 +27,7 @@
         </div>
         <div id="calendar"></div>
         <h2>選択した日</h2>
-        <label for="dateFormatSelect" style="font-size: 0.95em; margin-right: 8px;">日付表示形式</label>
+        <label for="dateFormatSelect" class="label-date-format">日付表示形式</label>
         <select id="dateFormatSelect">
             <option value="yyyy/mm/dd">yyyy/MM/dd</option>
             <option value="yy/mm/dd">yy/MM/dd</option>
@@ -39,6 +39,19 @@
             <button id="copyShifts" type="button">コピー</button>
         </div>
     </main>
+    <footer>
+        <small>
+            Version: <span id="appVersion">v1.1</span>
+            &nbsp;|&nbsp;
+            <a href="https://github.com/suwanohiro/ScheduleSelector" target="_blank"
+                rel="noopener noreferrer">GitHub</a>
+            &nbsp;|&nbsp;
+            <a href="https://github.com/suwanohiro/ScheduleSelector/issues/new?template=%E6%A9%9F%E8%83%BD%E8%BF%BD%E5%8A%A0%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88.md"
+                target="_blank" rel="noopener noreferrer">
+                機能追加要望はこちら
+            </a>
+        </small>
+    </footer>
     <script src="script.js"></script>
 </body>
 
