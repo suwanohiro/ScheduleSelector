@@ -20,6 +20,8 @@ let currentDate = new Date();
 let selectedShifts = {};
 /** 過去日選択可否フラグ */
 let allowPast = false; // デフォルトで過去も選択可
+/** 同じ日付を1行にまとめるフラグ */
+let groupShiftsByDate = false;
 
 /**
  * 数値を2桁ゼロ埋め文字列に変換
@@ -194,11 +196,18 @@ function renderSelectedShifts() {
             const dObj = new Date(y, m - 1, d);
             const wd = weekDays[dObj.getDay()];
             const dateStr = fmtObj.format(y, m, d);
-            selectedShifts[date]
-                .sort()
-                .forEach(time => {
+            const times = selectedShifts[date].sort();
+            
+            if (groupShiftsByDate) {
+                // 同じ日付の時間帯をカンマ区切りで1行にまとめる
+                const timeStr = times.map(time => `${time} コマ`).join(', ');
+                lines.push(`・${dateStr} (${wd}) ${timeStr}`);
+            } else {
+                // 各時間帯ごとに1行
+                times.forEach(time => {
                     lines.push(`・${dateStr} (${wd}) ${time} コマ`);
                 });
+            }
         });
     out.textContent = lines.join('\n');
 }
@@ -322,6 +331,18 @@ function setupAllowPastControl() {
 }
 
 /**
+ * 「同じ日付の場合は1行にまとめる」チェックボックスのセットアップ
+ */
+function setupGroupShiftsByDateControl() {
+    const cb = document.getElementById('groupShiftsByDate');
+    groupShiftsByDate = cb.checked;
+    cb.addEventListener('change', function () {
+        groupShiftsByDate = this.checked;
+        renderSelectedShifts();
+    });
+}
+
+/**
  * バージョン情報をres/version.txtから取得して表示
  */
 function fetchAndShowVersion() {
@@ -345,6 +366,7 @@ window.onload = function () {
     setupCopyButton();
     setupClearButton();
     setupAllowPastControl();
+    setupGroupShiftsByDateControl();
 
     // ▼ select要素のイベントで切り替え
     const select = document.getElementById('dateFormatSelect');
