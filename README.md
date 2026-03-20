@@ -1,7 +1,7 @@
 # 振替可能日選択ページ 利用ガイド
 
 このページは、シフトやレッスンの振替希望日・時間帯を簡単に選択・コピーできる Web ツールです。  
-**公開 URL:** [https://suwanohiro.cloudfree.jp/tools/NLabo/Schedule/](https://suwanohiro.cloudfree.jp/tools/NLabo/Schedule/)
+**公開 URL:** [https://scheduleselector.github.suwanohiro.com/](https://scheduleselector.github.suwanohiro.com/)
 
 ---
 
