@@ -2,11 +2,11 @@
  * 各曜日ごとのシフト時間帯
  */
 const shiftTimes = {
-    'Tue': ['17:15', '19:15'],
-    'Wed': ['17:15', '19:15'],
-    'Thu': ['17:15', '19:15'],
-    'Fri': ['17:15', '19:15'],
-    'Sat': ['10:00', '13:00', '15:00', '17:00']
+    'Tue': ['17:10', '19:00'],
+    'Wed': ['17:10', '19:00'],
+    'Thu': ['17:10', '19:00'],
+    'Fri': ['17:10', '19:00'],
+    'Sat': ['10:00', '12:40', '14:30', '16:20']
 };
 
 /** 日本語の曜日名 */
@@ -197,7 +197,7 @@ function renderSelectedShifts() {
             const wd = weekDays[dObj.getDay()];
             const dateStr = fmtObj.format(y, m, d);
             const times = selectedShifts[date].sort();
-            
+
             if (groupShiftsByDate) {
                 // 同じ日付の時間帯をカンマ区切りで1行にまとめる
                 const timeStr = times.map(time => `${time} コマ`).join(', ');
